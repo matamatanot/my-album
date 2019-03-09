@@ -15,14 +15,17 @@ class App extends Component {
   componentWillMount() {
     axios.get('https://wfc-2019.firebaseapp.com/images?limit=200&offset=')
          .then(res => {
-           const images = res.data.data.images.map(image => ({src: image.url, width: 4, height: 3}));
-           console.log(images);
+           const images = res.data.data.images.map(image => ({src: image.url, width: 4, height: 3, caption: image.description}));
            this.setState({ images: images });
          });
   }
 
   handleClick = () => {
     this.setState({ lightboxIsOpen: true });
+  };
+
+  closeLightbox = () => {
+    this.setState({ lightboxIsOpen: false });
   };
 
   gotoPrevLightboxImage = () => {
@@ -35,18 +38,12 @@ class App extends Component {
   };
 
   gotoNextLightboxImage = () => {
-    console.log('gotoNextLightboxImage');
     this.setState((state) => {
       if (state.currentImage >= state.images.length) {
         return { currentImage: 0 };
       }
       return { currentImage: state.currentImage + 1 };
     });
-  };
-
-  closeLightbox = () => {
-    console.log('closeLightbox');
-    this.setState({ lightboxIsOpen: false });
   };
 
   render() {
@@ -60,6 +57,7 @@ class App extends Component {
           onClickPrev={this.gotoPrevLightboxImage}
           onClickNext={this.gotoNextLightboxImage}
           onClose={this.closeLightbox}
+          backdropClosesModal
         />
       </div>
     );
