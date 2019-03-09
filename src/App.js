@@ -8,7 +8,9 @@ class App extends Component {
     super(props)
     this.state = {
       images: [],
+      currentImage: 0
     }
+    this.onCurrentImageChange = this.onCurrentImageChange.bind(this);
     this.deleteImage = this.deleteImage.bind(this);
   }
   
@@ -29,8 +31,12 @@ class App extends Component {
          });
   }
 
+  onCurrentImageChange(index, image) {
+    this.setState({ currentImage: index });
+  }
+
   deleteImage() {
-    if (window.confirm(`Are you sure you want to delete image number ${this.state.currentImage}?`)) {
+    if (window.confirm(`本当に${this.state.currentImage + 1}番目の画像を消してもよろしいですか?`)) {
         const images = this.state.images.slice();
         images.splice(this.state.currentImage, 1)
         this.setState({
@@ -43,19 +49,22 @@ class App extends Component {
     const hashtags = ['ca_wfc'];
     return (
       <div>
-        <TwitterShareButton url={'https://github.com/benhowell/react-grid-gallery'} />
         <Gallery
           images={this.state.images}
           enableImageSelection = {false}
+          showLightboxThumbnails
+          currentImageWillChange={this.onCurrentImageChange}
           customControls={[
             <TwitterShareButton 
+              key={'twitter' + this.state.currentImage}
               title='myalbum' 
               via='matamatak05' 
-              url='https://takumon.com/2018/09/16/' 
+              url='https://my-album-2e4a9.firebaseapp.com/'
               hashtags={hashtags}
             >
               <TwitterIcon size={32} round />
-            </TwitterShareButton>
+            </TwitterShareButton>,
+            <button key={'delete' + this.state.currentImage} onClick={this.deleteImage}>Delete Image</button>,
           ]}
         />
       </div>
