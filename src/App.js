@@ -13,9 +13,10 @@ class App extends Component {
     }
   }
   componentWillMount() {
-    axios.get('https://wfc-2019.firebaseapp.com/images?limit=10000&offset=')
+    axios.get('https://wfc-2019.firebaseapp.com/images?limit=200&offset=')
          .then(res => {
            const images = res.data.data.images.map(image => ({src: image.url, width: 4, height: 3}));
+           console.log(images);
            this.setState({ images: images });
          });
   }
@@ -25,17 +26,18 @@ class App extends Component {
   };
 
   gotoPrevLightboxImage = () => {
-    this.setState((state, props) => {
+    this.setState((state) => {
       if (state.currentImage <= 0) {
-        return { currentImage: this.state.images.length };
+        return { currentImage: state.images.length };
       }
       return { currentImage: state.currentImage - 1 };
     });
   };
 
   gotoNextLightboxImage = () => {
-    this.setState((state, props) => {
-      if (state.currentImage >= this.state.images.length) {
+    console.log('gotoNextLightboxImage');
+    this.setState((state) => {
+      if (state.currentImage >= state.images.length) {
         return { currentImage: 0 };
       }
       return { currentImage: state.currentImage + 1 };
@@ -43,19 +45,23 @@ class App extends Component {
   };
 
   closeLightbox = () => {
+    console.log('closeLightbox');
     this.setState({ lightboxIsOpen: false });
   };
 
   render() {
     return (
-      <button onClick={this.handleClick}>Open lightbox</button>
-      <Lightbox
-        images={this.state.images}
-        isOpen={this.state.lightboxIsOpen}
-        onClickPrev={this.gotoPrevLightboxImage}
-        onClickNext={this.gotoNextLightboxImage}
-        onClose={this.closeLightbox}
-      />
+      <div>
+        <button onClick={this.handleClick}>Open lightbox</button>
+        <Lightbox
+          images={this.state.images}
+          currentImage={this.state.currentImage}
+          isOpen={this.state.lightboxIsOpen}
+          onClickPrev={this.gotoPrevLightboxImage}
+          onClickNext={this.gotoNextLightboxImage}
+          onClose={this.closeLightbox}
+        />
+      </div>
     );
   }
 }
