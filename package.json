@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-grid-gallery": "^0.5.3",
     "react-images": "^0.5.19",
     "react-scripts": "2.1.8",
     "react-virtualized": "^9.21.0"
