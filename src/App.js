@@ -14,14 +14,16 @@ class App extends Component {
     super(props)
     this.state = {
       images: [],
-      currentImage: 0
+      loadedImage: 0,
+      currentImage: 0,
+      maxLoaded: false
     }
     this.onCurrentImageChange = this.onCurrentImageChange.bind(this);
     this.deleteImage = this.deleteImage.bind(this);
   }
   
   componentWillMount() {
-    axios.get('https://wfc-2019.firebaseapp.com/images?limit=600&offset=')
+    axios.get('https://wfc-2019.firebaseapp.com/images?limit=200&offset=')
          .then(res => {
           const images = res.data.data.images.map(image => (
             {
@@ -37,6 +39,7 @@ class App extends Component {
             }
           ));
            this.setState({ images: images });
+           this.setState({ loadedImage: 200 });
          });
   }
 
@@ -70,8 +73,33 @@ class App extends Component {
       const mapUrl = `https://www.google.com/maps?q=${cureentImage.lat},${cureentImage.lng}`
       const win = window.open(mapUrl, '_blank');
       win.focus();
-    } 
+    }
+    const nextClick = () => {
+      axios.get(`https://wfc-2019.firebaseapp.com/images?limit=200&offset=${this.state.loadedImage}`)
+         .then(res => {
+          const images = res.data.data.images.map(image => (
+            {
+              src: image.url,
+              thumbnail: image.url,
+              thumbnailWidth: image.width / 10,
+              thumbnailHeight: image.height / 10,
+              caption: image.title,
+              alt: image.title,
+              lat: image.location.lat,
+              lng: image.location.lng,
+              postDatetime: image.postDatetime
+            }
+          ));
+          if (images.length > 0) {
+            this.setState({ images: this.state.images.concat(images) });
+            this.setState({ loadedImage: this.state.loadedImage + 200 });
+          }else{
+            this.setState({ maxLoaded: true });
+          }
+         });
+    }
     const formatter = buildFormatter(japaneseStrings);
+
     return (
       <div>
         <header className="App-header">
@@ -98,6 +126,8 @@ class App extends Component {
             <TimeAgo date={cureentImage.postDatetime} formatter={formatter} />,
           ]}
         />
+        {!this.state.maxLoaded && <button onClick={() => nextClick()} width='32' height='32' >次読み込むよ</button>}
+        {this.state.maxLoaded && <button onClick={() => nextClick()} width='32' height='32' >もう読み込めないよ 間に合わなかったよ</button>}
       </div>
     );
   }
