@@ -126,8 +126,8 @@ class App extends Component {
             <TimeAgo date={cureentImage.postDatetime} formatter={formatter} />,
           ]}
         />
-        {!this.state.maxLoaded && this.state.loadedImage !== 0 && <button onClick={() => nextClick()} width='32' height='32' >次読み込むよ</button>}
-        {this.state.maxLoaded && <button onClick={() => nextClick()} width='32' height='32' >もう読み込めないよ 間に合わなかったよ</button>}
+        {!this.state.maxLoaded && this.state.loadedImage !== 0 && <button onClick={() => nextClick()} >次読み込むよ</button>}
+        {this.state.maxLoaded && <button onClick={() => nextClick()} >もう読み込めないよ ボタン押さずともviewportに入ったら追加ロード処理など追加したかったよ</button>}
       </div>
     );
   }
