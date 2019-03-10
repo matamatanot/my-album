@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { TwitterShareButton, TwitterIcon } from 'react-share';
+import TimeAgo from 'react-timeago'
 import axios from 'axios';
 import Gallery from 'react-grid-gallery';
+import GoogleMapLogo from './icons8-google-maps.svg'
 
 class App extends Component {
   constructor(props) {
@@ -24,14 +26,17 @@ class App extends Component {
               thumbnailWidth: image.width / 10,
               thumbnailHeight: image.height / 10,
               caption: image.description,
-              alt: image.title
+              alt: image.title,
+              lat: image.location.lat,
+              lng: image.location.lng,
+              postDatetime: image.postDatetime
             }
           ));
            this.setState({ images: images });
          });
   }
 
-  onCurrentImageChange(index, image) {
+  onCurrentImageChange(index) {
     this.setState({ currentImage: index });
   }
 
@@ -65,6 +70,8 @@ class App extends Component {
               <TwitterIcon size={32} round />
             </TwitterShareButton>,
             <button key={'delete' + this.state.currentImage} onClick={this.deleteImage}>Delete Image</button>,
+            <TimeAgo date="Aug 29, 2014" />,
+            <img src={GoogleMapLogo} alt="map"></img>
           ]}
         />
       </div>
