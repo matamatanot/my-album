@@ -80,6 +80,7 @@ class App extends Component {
         <Gallery
           images={this.state.images}
           enableImageSelection = {false}
+          backdropClosesModal
           showLightboxThumbnails
           currentImageWillChange={this.onCurrentImageChange}
           customControls={[
