@@ -3,7 +3,7 @@ import { TwitterShareButton, TwitterIcon } from 'react-share';
 import TimeAgo from 'react-timeago';
 import axios from 'axios';
 import Gallery from 'react-grid-gallery';
-import GoogleMapLogo from './Google Maps.svg';
+import GoogleMapLogo from './google-maps-svg.svg';
 import Trash from './icons8-waste-48.png';
 import japaneseStrings from 'react-timeago/lib/language-strings/ja'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
@@ -93,8 +93,8 @@ class App extends Component {
             >
               <TwitterIcon size={32} round />
             </TwitterShareButton>,
-            <img src={GoogleMapLogo} alt="map" onClick={() => mapClick()} ></img>,
-            <img src={Trash} alt="trash" onClick={this.deleteImage} ></img>,
+            <img src={GoogleMapLogo} alt="map" onClick={() => mapClick()} width='32' height='32' ></img>,
+            <img src={Trash} alt="trash" onClick={this.deleteImage} width='39' height='39'></img>,
             <TimeAgo date={cureentImage.postDatetime} formatter={formatter} />,
           ]}
         />
