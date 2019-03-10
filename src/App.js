@@ -3,8 +3,8 @@ import { TwitterShareButton, TwitterIcon } from 'react-share';
 import TimeAgo from 'react-timeago';
 import axios from 'axios';
 import Gallery from 'react-grid-gallery';
-import GoogleMapLogo from './google-maps-svg.svg';
-import Trash from './icons8-waste-48.png';
+import GoogleMapLogo from './icons/google-maps-svg.svg';
+import Trash from './icons/icons8-waste-48.png';
 import japaneseStrings from 'react-timeago/lib/language-strings/ja'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import './App.css';
