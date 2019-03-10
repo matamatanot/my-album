@@ -21,7 +21,7 @@ class App extends Component {
   }
   
   componentWillMount() {
-    axios.get('https://wfc-2019.firebaseapp.com/images?limit=200&offset=')
+    axios.get('https://wfc-2019.firebaseapp.com/images?limit=600&offset=')
          .then(res => {
           const images = res.data.data.images.map(image => (
             {
@@ -29,7 +29,7 @@ class App extends Component {
               thumbnail: image.url,
               thumbnailWidth: image.width / 10,
               thumbnailHeight: image.height / 10,
-              caption: image.description,
+              caption: image.title,
               alt: image.title,
               lat: image.location.lat,
               lng: image.location.lng,
