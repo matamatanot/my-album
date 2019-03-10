@@ -2317,9 +2317,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000918, caniuse-lite@^1.0.30000929, caniuse-lite@^1.0.30000939, caniuse-lite@^1.0.30000940:
-  version "1.0.30000942"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000942.tgz#454139b28274bce70bfe1d50c30970df7430c6e4"
-  integrity sha512-wLf+IhZUy2rfz48tc40OH7jHjXjnvDFEYqBHluINs/6MgzoNLPf25zhE4NOVzqxLKndf+hau81sAW0RcGHIaBQ==
+  version "1.0.30000943"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000943.tgz#00b25bd5808edc2ed1cfb53533a6a6ff6ca014ee"
+  integrity sha512-nJMjU4UaesbOHTcmz6VS+qaog++Fdepg4KAya5DL/AZrL/aaAZDGOOQ0AECtsJa09r4cJBdHZMive5mw8lnQ5A==
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -8260,9 +8260,9 @@ react-error-overlay@^5.1.4:
   integrity sha512-fp+U98OMZcnduQ+NSEiQa4s/XMsbp+5KlydmkbESOw4P69iWZ68ZMFM5a2BuE0FgqPBKApJyRuYHR95jM8lAmg==
 
 react-grid-gallery@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/react-grid-gallery/-/react-grid-gallery-0.5.3.tgz#73124ae4b8dd1653464fe03394ad3ba35eb6b758"
-  integrity sha512-71P6rRGQrbU0StSXRRTJ3KVjgpglLRNEQ/tRqRgi0dKnvDaVdz2PQMk//UTolw/E0Mu2Ri6hLv9/rsZpJ7l3fA==
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/react-grid-gallery/-/react-grid-gallery-0.5.4.tgz#d4b048f5e2bb7d6d5465700a914e903c6665ac74"
+  integrity sha512-mEuDGCScA+P3ShSJExyo9bxCHtG04Mpm/o9ctzijhdqN8WLP9q1bIDQz+o0mL7ktH/KUvSAF2opsKfJ44C07rA==
   dependencies:
     prop-types "^15.5.8"
     react-images "^0.5.16"
