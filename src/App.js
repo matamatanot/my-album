@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { TwitterShareButton, TwitterIcon } from 'react-share';
-import TimeAgo from 'react-timeago'
+import TimeAgo from 'react-timeago';
 import axios from 'axios';
 import Gallery from 'react-grid-gallery';
-import GoogleMapLogo from './icons8-google-maps.svg'
+import GoogleMapLogo from './Google Maps.svg';
+import Trash from './icons8-waste-48.png';
+import japaneseStrings from 'react-timeago/lib/language-strings/ja'
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -51,9 +55,28 @@ class App extends Component {
   }
 
   render() {
-    const hashtags = ['ca_wfc'];
+    const cureentImage = this.state.images[this.state.currentImage] 
+      || {src: '',
+          thumbnail: '',
+          thumbnailWidth: '',
+          thumbnailHeight: '',
+          caption: '',
+          alt: '',
+          lat: '',
+          lng: '',
+          postDatetime: ''
+        };
+    const mapClick = () => {
+      const mapUrl = `https://www.google.com/maps?q=${cureentImage.lat},${cureentImage.lng}`
+      const win = window.open(mapUrl, '_blank');
+      win.focus();
+    } 
+    const formatter = buildFormatter(japaneseStrings);
     return (
       <div>
+        <header className="App-header">
+          <p>Grid Gallery</p>  
+        </header>
         <Gallery
           images={this.state.images}
           enableImageSelection = {false}
@@ -62,16 +85,16 @@ class App extends Component {
           customControls={[
             <TwitterShareButton 
               key={'twitter' + this.state.currentImage}
-              title='myalbum' 
+              title='Web Frontend Challengeのテストツイートです' 
               via='matamatak05' 
-              url='https://my-album-2e4a9.firebaseapp.com/'
-              hashtags={hashtags}
+              url={cureentImage.src}
+              hashtags={['ca_wfc']}
             >
               <TwitterIcon size={32} round />
             </TwitterShareButton>,
-            <button key={'delete' + this.state.currentImage} onClick={this.deleteImage}>Delete Image</button>,
-            <TimeAgo date="Aug 29, 2014" />,
-            <img src={GoogleMapLogo} alt="map"></img>
+            <img src={GoogleMapLogo} alt="map" onClick={() => mapClick()} ></img>,
+            <img src={Trash} alt="trash" onClick={this.deleteImage} ></img>,
+            <TimeAgo date={cureentImage.postDatetime} formatter={formatter} />,
           ]}
         />
       </div>
